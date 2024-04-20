@@ -30,7 +30,7 @@ models:
   #         - unique
   #         - not_null
 
-  - name: customers
+  - name: test_dbt_project
     description: "Customer table with orders and payment details for distinct users"
     columns:
       - name: last_name
