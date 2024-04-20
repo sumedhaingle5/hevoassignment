@@ -14,7 +14,6 @@ order_info as (
         a.user_id as customer_id,
         min(a.order_date) as first_order,
         max(a.order_date) as last_order,
-        a.id,
         sum(b.amount) as order_amount,
         b.order_id
     from customers.customers.hevo_raw_orders as a
