@@ -33,7 +33,7 @@ customer_payments as (
     select
         id as customer_id,
         order_id,
-        sum(payment_amount) as customer_lifetime_value
+        sum(amount) as customer_lifetime_value
     from customers.customers.hevo_raw_payments
     group by user_id
 )
