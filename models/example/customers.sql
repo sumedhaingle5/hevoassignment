@@ -64,5 +64,5 @@ inner join
     most_recent_order on ci.customer_id = most_recent_order.customer_id
 inner join
     number_of_orders on ci.customer_id = number_of_orders.customer_id
-inner_join
+inner join
     customer_lifetime_value on ci.customer_id = customer_lifetime_value.customer_id
