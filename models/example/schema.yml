@@ -1,6 +1,16 @@
 
 version: 2
 
+
+source:
+ - name: customers
+   tables:
+     - name: hevo_raw_customers
+     - name: hevo_raw_orders
+     - name: hevo_raw_payments
+
+
+
 models:
   - name: my_first_dbt_model
     description: "A starter dbt model"
@@ -19,3 +29,18 @@ models:
         tests:
           - unique
           - not_null
+
+  - name: customers
+    description: "Customer table with orders and payment details for distinct users"
+    columns:
+      - name: customer_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: most_recent_order
+        description: "The first order date for the customer"
+      - name: number_of_orders  
+        description: "The last(most recent) order date for the customer"
+      - name: customer_lifetime_value
+        description: "The sum of all payments made by the customer"
