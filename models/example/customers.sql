@@ -43,9 +43,8 @@ customer_lifetime_value as (
     from customers.customers.hevo_raw_payments as p
     inner join customers.customers.hevo_raw_orders as o on p.order_id = o.id
     group by o.user_id
-)
+),
 
--- dataset to calculate the sum of all payments made by each customer
 
 target as
 (select
