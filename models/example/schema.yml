@@ -38,9 +38,3 @@ models:
         tests:
           - unique
           - not_null
-      - name: most_recent_order
-        description: "The first order date for the customer"
-      - name: number_of_orders  
-        description: "The last(most recent) order date for the customer"
-      - name: customer_lifetime_value
-        description: "The sum of all payments made by the customer"
