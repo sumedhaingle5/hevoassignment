@@ -34,7 +34,7 @@ number_of_orders as (
         count(id) as number_of_orders
     from customers.customers.hevo_raw_orders
     group by user_id
-)
+),
 
 customer_lifetime_value as (
     select
