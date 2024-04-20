@@ -34,17 +34,9 @@ number_of_orders as (
         count(id) as number_of_orders
     from customers.customers.hevo_raw_orders
     group by user_id
-),
+)
 
 -- dataset to calculate the sum of all payments made by each customer
-
-customer_lifetime_value as (
-    select
-        sum(amount) as customer_lifetime_value,
-        order_id
-    from customers.customers.hevo_raw_payments
-    group by order_id
-)
 
 select
     ci.customer_id,
@@ -52,8 +44,7 @@ select
     ci.last_name,
     first_order.first_order,
     most_recent_order.most_recent_order,
-    number_of_orders.number_of_orders,
-    sum(pay.amount) as customer_lifetime_value
+    number_of_orders.number_of_orders
 from
     customer_info as ci
 inner join
@@ -62,6 +53,5 @@ inner join
     most_recent_order on ci.customer_id = most_recent_order.customer_id
 inner join
     number_of_orders on ci.customer_id = number_of_orders.customer_id
-inner join
-    customer_lifetime_value on ci.customer_id = customer_lifetime_value.customer_id
+
 
