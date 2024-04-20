@@ -19,7 +19,7 @@ order_info as (
     from customers.customers.hevo_raw_orders as a
     inner join customers.customers.hevo_raw_payments as b on a.id = b.order_id
     group by b.order_id, a.user_id
-),
+)
 
 -- target as (
 --     select
