@@ -35,7 +35,7 @@ customer_payments as (
         order_id,
         sum(amount) as customer_lifetime_value
     from customers.customers.hevo_raw_payments
-    group by user_id
+    group by id
 )
 
 -- Final query to join all the information and create the target table customers
