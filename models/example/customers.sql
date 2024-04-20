@@ -12,7 +12,8 @@ with customer_info as (
 order_info as (
     select
         a.user_id as customer_id,
-        a.order_date,
+        min(a.order_date) as first_order,
+        max(a.order_date) as last_order,
         a.id,
         sum(b.amount) as order_amount,
         b.order_id
@@ -26,7 +27,8 @@ target as (
         ci.customer_id as customer_id,
         ci.first_name as first_name,
         ci.last_name as last_name,
-        oi.order_date as order_date,
+        oi.first_order as first_order,
+        oi.last_order as last_order,
         oi.order_id as order_id,
         oi.order_amount as order_amount
     from customer_info as ci
@@ -37,8 +39,8 @@ select
     customer_id,
     first_name,
     last_name,
-    min(order_date) as first_order,
-    max(order_date) as last_order,
+    first_order,
+    last_order,
     count(order_id) as order_count,
     sum(order_amount) as customer_lifetime_value
 from
