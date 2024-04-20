@@ -20,22 +20,23 @@ first_order as (
 
 -- -- dataset to get the last order date for each customer
 
--- most_recent_order as (
---     select
---         user_id as customer_id,
---         max(order_date) as most_recent_order
---     from customers.customers.hevo_raw_orders
---     group by user_id
--- ),
+most_recent_order as (
+    select
+        user_id as customer_id,
+        max(order_date) as most_recent_order
+    from customers.customers.hevo_raw_orders
+    group by user_id
+),
 
--- number_of_orders as (
---     select
---         count(id) as number_of_orders
---     from customers.customers.hevo_raw_orders
---     group by user_id
--- ),
+number_of_orders as (
+    select
+        user_id as customer_id
+        count(id) as number_of_orders
+    from customers.customers.hevo_raw_orders
+    group by user_id
+),
 
--- -- dataset to calculate the sum of all payments made by each customer
+-- dataset to calculate the sum of all payments made by each customer
 -- customer_lifetime_value as (
 --     select
 --         id as customer_id,
@@ -45,23 +46,6 @@ first_order as (
 --     group by user_id
 -- )
 
--- Final query to join all the information and create the target table customers
--- select
---     ci.customer_id,
---     ci.first_name,
---     ci.last_name,
---     fod.most_recent_order,
---     lod.number_of_orders,
---     cp.customer_lifetime_value
--- from
---     customer_info ci
--- left join
---     first_order_date fod on ci.customer_id = fod.customer_id
--- left join
---     last_order_date lod on ci.customer_id = lod.customer_id
--- left join
---     customer_payments cp on lod.id = cp.order_id
-
 select
     ci.customer_id,
     ci.first_name,
@@ -69,5 +53,9 @@ select
     first_order.first_order
 from
     customer_info as ci
-left join
+inner join
     first_order on ci.customer_id = first_order.customer_id
+inner join
+    most_recent_order on ci.customer_id = most_recent_order.customer_id
+inner join
+    number_of_orders on ci.customer_id = number_of_orders.customer_id
