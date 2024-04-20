@@ -16,7 +16,7 @@ first_order as (
         min(order_date) as first_order
     from customers.customers.hevo_raw_orders
     group by user_id
-),
+)
 
 -- -- dataset to get the last order date for each customer
 
