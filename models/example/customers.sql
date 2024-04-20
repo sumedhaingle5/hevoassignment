@@ -44,7 +44,7 @@ customer_lifetime_value as (
         order_id
     from customers.customers.hevo_raw_payments
     inner join customers.customers.hevo_raw_orders on customers.customers.hevo_raw_payments.order_id = customers.customers.hevo_raw_orders.id
-    group by customers.customers.hevo_raw_orders.user_id
+    group by customers.customers.hevo_raw_orders.user_id as customer_id
 )
 
 select
