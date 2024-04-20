@@ -13,12 +13,12 @@ order_info as (
     select
         a.user_id as customer_id,
         a.order_date,
-        a.id as order_id,
+        a.id,
         sum(b.amount) as order_amount,
         b.order_id
     from customers.customers.hevo_raw_orders as a
     inner join customers.customers.hevo_raw_payments as b on a.id = b.order_id
-    group by a.id
+    group by b.order_id
 ),
 
 target as (
