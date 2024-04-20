@@ -66,7 +66,7 @@ select
     ci.customer_id,
     ci.first_name,
     ci.last_name,
-    fod.first_order
+    first_order.first_order
 from
     customer_info as ci
 left join
