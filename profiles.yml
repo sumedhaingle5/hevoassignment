@@ -119,7 +119,7 @@ customers:
             role: HEVO        # optional, the snowflake role you want to use
                                   # when connecting
             database: customers
-            warehouse: customers
+            warehouse: HEVO_ASSIGNMENT
             schema: customers     # use the prod schema instead
                   # default target is dev unless changed at run time
 
