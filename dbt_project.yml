@@ -38,6 +38,11 @@ models:
 
    customers:
       +materialized: table
+      +tests:
+        -not_null:
+           columns: [customer_id]
+        -unique:
+           columns: [customer_id]
 
 on-run-start:
-  - dbt test
+  - dbt test --models customers --bypass-cache
