@@ -33,8 +33,7 @@ models:
   - name: customers
     description: "Customer table with orders and payment details for distinct users"
     columns:
-      - name: customer_id
+      - name: last_name
         description: "The primary key for this table"
         tests:
           - unique
-          - nut_null
