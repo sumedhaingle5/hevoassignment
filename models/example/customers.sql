@@ -12,7 +12,7 @@ with customer_info as (
 -- dataset to get the first order date for each customer
 first_order as (
     select
-        -- user_id as customer_id,
+        user_id as customer_id,
         min(order_date) as first_order
     from customers.customers.hevo_raw_orders
     group by user_id
@@ -70,4 +70,4 @@ select
 from
     customer_info as ci
 left join
-    first_order fod on ci.customer_id = fod.user_id
+    first_order on ci.customer_id = first_order.customer_id
