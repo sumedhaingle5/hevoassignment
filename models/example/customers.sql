@@ -30,7 +30,7 @@ most_recent_order as (
 
 number_of_orders as (
     select
-        user_id as customer_id
+        user_id as customer_id,
         count(id) as number_of_orders
     from customers.customers.hevo_raw_orders
     group by user_id
