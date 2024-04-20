@@ -50,7 +50,9 @@ select
     ci.customer_id,
     ci.first_name,
     ci.last_name,
-    first_order.first_order
+    first_order.first_order,
+    most_recent_order.most_recent_order,
+    number_of_orders.number_of_orders
 from
     customer_info as ci
 inner join
