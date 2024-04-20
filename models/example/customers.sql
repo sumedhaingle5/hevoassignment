@@ -9,62 +9,34 @@ with customer_info as (
     from customers.customers.hevo_raw_customers
 ),
 
--- dataset to get the first order date for each customer
-first_order as (
+order_info as (
     select
-        user_id as customer_id,
-        min(order_date) as first_order
-    from customers.customers.hevo_raw_orders
-    group by user_id
+        a.user_id as customer_id,
+        a.order_date,
+        a.id as order_id,
+        sum(b.amount) as order_amount,
+        b.order_id
+    from customers.customers.hevo_raw_orders as a
+    inner join customers.customers.hevo_raw_payments as b on a.id = b.order_id
+    group by a.id
 ),
 
--- -- dataset to get the last order date for each customer
-
-most_recent_order as (
-    select
-        user_id as customer_id,
-        max(order_date) as most_recent_order
-    from customers.customers.hevo_raw_orders
-    group by user_id
-),
-
-number_of_orders as (
-    select
-        user_id as customer_id,
-        count(id) as number_of_orders
-    from customers.customers.hevo_raw_orders
-    group by user_id
-),
-
--- dataset to calculate the sum of all payments made by each customer
-
-customer_lifetime_value as (
-    select
-        sum(amount) as customer_lifetime_value,
-        order_id
-    from customers.customers.hevo_raw_payments
-    group by order_id
+target as (
+    select *
+    from customer_info
+    inner join order_info on customer_info.customer_id = order_info.customer_id
 )
 
 select
-    ci.customer_id,
-    ci.first_name,
-    ci.last_name,
-    first_order.first_order,
-    most_recent_order.most_recent_order,
-    number_of_orders.number_of_orders,
-    customer_lifetime_value.customer_lifetime_value
+    customer_id,
+    first_name,
+    last_name,
+    min(order_date) as first_order,
+    max(order_date) as last_order,
+    count(order_id) as order_count,
+    sum(order_amount) as customer_lifetime_value
 from
-    customer_info as ci
-inner join
-    first_order on ci.customer_id = first_order.customer_id
-inner join
-    most_recent_order on ci.customer_id = most_recent_order.customer_id
-inner join
-    number_of_orders on ci.customer_id = number_of_orders.customer_id
-right outer join
-    customers.customers.hevo_raw_orders on ci.customer_id = customers.customers.hevo_raw_orders.user_id
-inner join
-    customer_lifetime_value on customers.customers.hevo_raw_orders.id = customer_lifetime_value.order_id
+    target
+group by customer_id
 
-group by ci.customer_id
+    
