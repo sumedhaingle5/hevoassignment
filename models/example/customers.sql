@@ -31,6 +31,7 @@ most_recent_order as (
 number_of_orders as (
     select
         user_id as customer_id,
+        id as order_id,
         count(id) as number_of_orders
     from customers.customers.hevo_raw_orders
     group by user_id
@@ -43,8 +44,7 @@ customer_lifetime_value as (
         sum(amount) as customer_lifetime_value,
         order_id
     from customers.customers.hevo_raw_payments
-    inner join customers.customers.hevo_raw_orders on customers.customers.hevo_raw_payments.order_id = customers.customers.hevo_raw_orders.id
-    group by customers.customers.hevo_raw_orders.user_id as customer_id
+    group by order_id
 )
 
 select
@@ -64,4 +64,6 @@ inner join
 inner join
     number_of_orders on ci.customer_id = number_of_orders.customer_id
 inner join
-    customer_lifetime_value on ci.customer_id = customer_lifetime_value.customer_id
+    customer_lifetime_value on number_of_orders.order_id = customer_lifetime_value.order_id
+
+group by ci.customer_id
