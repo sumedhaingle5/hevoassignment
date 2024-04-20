@@ -22,9 +22,15 @@ order_info as (
 ),
 
 target as (
-    select *
-    from customer_info
-    inner join order_info on customer_info.customer_id = order_info.customer_id
+    select
+        ci.customer_id as customer_id,
+        ci.first_name as first_name,
+        ci.last_name as last_name,
+        oi.order_date as order_date,
+        oi.order_id as order_id,
+        oi.order_amount as order_amount
+    from customer_info as ci
+    inner join order_info as oi on ci.customer_id = oi.customer_id
 )
 
 select
