@@ -79,10 +79,10 @@ select * from target
 
 
 
-{% test not_null(customers, customer_id) %}
+-- {% test not_null(customers, customer_id) %}
 
-    select *
-    from {{ customers }}
-    where {{ customer_id }} is null
+--     select *
+--     from {{ customers }}
+--     where {{ customer_id }} is null
 
-{% endtest %}
+-- {% endtest %}

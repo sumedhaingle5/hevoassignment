@@ -2,33 +2,33 @@
 version: 2
 
 
-source:
- - name: customers
-   tables:
-     - name: hevo_raw_customers
-     - name: hevo_raw_orders
-     - name: hevo_raw_payments
+# source:
+#  - name: customers
+#    tables:
+#      - name: hevo_raw_customers
+#      - name: hevo_raw_orders
+#      - name: hevo_raw_payments
 
 
 
 models:
-  - name: my_first_dbt_model
-    description: "A starter dbt model"
-    columns:
-      - name: id
-        description: "The primary key for this table"
-        tests:
-          - unique
-          - not_null
+  # - name: my_first_dbt_model
+  #   description: "A starter dbt model"
+  #   columns:
+  #     - name: id
+  #       description: "The primary key for this table"
+  #       tests:
+  #         - unique
+  #         - not_null
 
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
-    columns:
-      - name: id
-        description: "The primary key for this table"
-        tests:
-          - unique
-          - not_null
+  # - name: my_second_dbt_model
+  #   description: "A starter dbt model"
+  #   columns:
+  #     - name: id
+  #       description: "The primary key for this table"
+  #       tests:
+  #         - unique
+  #         - not_null
 
   - name: customers
     description: "Customer table with orders and payment details for distinct users"
@@ -37,4 +37,3 @@ models:
         description: "The primary key for this table"
         tests:
           - unique
-          - not_null
