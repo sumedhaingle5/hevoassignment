@@ -16,7 +16,7 @@ first_order as (
         min(order_date) as first_order
     from customers.customers.hevo_raw_orders
     group by user_id
-)
+),
 
 -- -- dataset to get the last order date for each customer
 
@@ -34,7 +34,7 @@ number_of_orders as (
         count(id) as number_of_orders
     from customers.customers.hevo_raw_orders
     group by user_id
-),
+)
 
 -- dataset to calculate the sum of all payments made by each customer
 -- customer_lifetime_value as (
