@@ -47,7 +47,8 @@ customer_lifetime_value as (
 
 -- dataset to calculate the sum of all payments made by each customer
 
-select
+target as
+(select
     ci.customer_id,
     ci.first_name,
     ci.last_name,
@@ -64,6 +65,9 @@ inner join
 inner join
     number_of_orders on ci.customer_id = number_of_orders.customer_id
 inner join
-    customer_lifetime_value on ci.customer_id = customer_lifetime_value.customer_id
+    customer_lifetime_value on ci.customer_id = customer_lifetime_value.customer_id)
+
+
+select * from target
 
 
