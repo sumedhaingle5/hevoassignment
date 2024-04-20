@@ -15,8 +15,6 @@ models:
  
   - name: customers
     description: "Customer table with orders and payment details for distinct users"
-    config:
-      materialized: table
     columns:
       - name: customer_id
         description: "The primary key for this table"
