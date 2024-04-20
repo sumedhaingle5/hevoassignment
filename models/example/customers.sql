@@ -28,6 +28,8 @@ most_recent_order as (
     group by user_id
 ),
 
+-- -- dataset to get the number of orders for each customer
+
 number_of_orders as (
     select
         user_id as customer_id,
@@ -35,6 +37,9 @@ number_of_orders as (
     from customers.customers.hevo_raw_orders
     group by user_id
 ),
+
+-- -- dataset to get the total amount for each customer
+
 
 customer_lifetime_value as (
     select
@@ -44,6 +49,8 @@ customer_lifetime_value as (
     inner join customers.customers.hevo_raw_orders as o on p.order_id = o.id
     group by o.user_id
 ),
+
+----consolidation of all target attributes
 
 
 target as
@@ -70,3 +77,12 @@ inner join
 select * from target
 
 
+
+
+{% test not_null(customers, customer_id) %}
+
+    select *
+    from {{ customers }}
+    where {{ customer_id }} is null
+
+{% endtest %}
