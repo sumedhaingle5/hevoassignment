@@ -7,7 +7,6 @@ with customer_info as (
         first_name,
         last_name
     from customers.customers.hevo_raw_customers
-    group by customer_id, first_name, last_name
 ),
 
 order_info as (
