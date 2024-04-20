@@ -1,7 +1,5 @@
 {{ config(materialized='table') }}
 
-—model for customers target table
-
 -- dataset to select customer ID, first name, and last name from the customers table
 with customer_info as (
     select
