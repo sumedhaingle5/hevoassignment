@@ -21,29 +21,29 @@ order_info as (
     group by b.order_id, a.user_id
 ),
 
-target as (
-    select
-        ci.customer_id as customer_id,
-        ci.first_name as first_name,
-        ci.last_name as last_name,
-        oi.first_order as first_order,
-        oi.last_order as last_order,
-        oi.order_id as order_id,
-        oi.order_amount as order_amount
-    from customer_info as ci
-    inner join order_info as oi on ci.customer_id = oi.customer_id
-)
+-- target as (
+--     select
+--         ci.customer_id as customer_id,
+--         ci.first_name as first_name,
+--         ci.last_name as last_name,
+--         oi.first_order as first_order,
+--         oi.last_order as last_order,
+--         oi.order_id as order_id,
+--         oi.order_amount as order_amount
+--     from customer_info as ci
+--     inner join order_info as oi on ci.customer_id = oi.customer_id
+-- )
 
 select
-    customer_id,
-    first_name,
-    last_name,
-    first_order,
-    last_order,
-    count(order_id) as order_count,
-    sum(order_amount) as customer_lifetime_value
-from
-    target
-group by customer_id
+    ci.customer_id as customer_id,
+    ci.first_name as first_name,
+    ci.last_name as last_name,
+    oi.first_order as first_order,
+    oi.last_order as last_order,
+    count(oi.order_id) as order_count,
+    sum(oi.order_amount) as customer_lifetime_value
+from customer_info as ci
+inner join order_info as oi on ci.customer_id = oi.customer_id
+group by ci.customer_id
 
     
