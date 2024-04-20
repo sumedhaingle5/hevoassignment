@@ -46,8 +46,6 @@ select
     fod.most_recent_order,
     lod.number_of_orders,
     cp.customer_lifetime_value
-into
-    customers_summary
 from
     customer_info ci
 left join
