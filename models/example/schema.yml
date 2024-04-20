@@ -21,5 +21,10 @@ models:
       - name: customer_id
         description: "The primary key for this table"
         tests:
-          - unique
-          - not_null
+          -not_null:
+            columns: [customer_id]
+          -unique:
+            columns: [customer_id]
+
+on-run-start:
+  - dbt test --models customers --bypass-cache
