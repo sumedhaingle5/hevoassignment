@@ -1,0 +1,32 @@
+Following steps were followed in order to complete the exercise:
+
+1. Install a PGSQL database on your local or a cloud virtual machine (should be a
+Docker-based image)
+>> Utilised an online open source Saas platform pgedgecloud to ingest source data in 3 different tables from the given csv files. Wrote a Python code to ingest data from csv file to
+source tables.
+Link: https://app.pgedge.com/79b6cd92-3dce-4f0b-ae05-9d5d73a3dee4/databases/5a570e1d-d6f3-4d26-b7b6-1bf6135a5459/tables?tab=public__%2F__raw_payments
+
+2. In your local PGSQL database, create 3 tables and load the 3 attached CSV files into the respective tables.
+>> source tables created with provided names
+
+3. 3. Sign up for a snowflake trial account
+>> https://nn14897.us-east4.gcp.snowflakecomputing.com
+
+4. Sign up for a hevo trial from Snowflake Partner Connect
+>> Directly created a free trial hevo account
+https://in.hevodata.com/model/dbt/1/overview
+
+5. Build a pipeline with the PGSQL database installed in Step 1 as the source and your
+snowflake warehouse as the destination. NOTE: The pipeline must be using Logical
+Replication ingestion mode
+>> Pipeline created in Hevo platform
+
+6. Once the data has been loaded into the Snowflake warehouse model, the data using
+“dbt” to build materialized table “customers” with the following columns
+>> Model created in Hevo platform through DBT Core
+
+7. After the model has been built and tested (you must include dbt tests in your project),
+merge your dbt project into GitHub.
+>> Included test cases, files saved in GitHub repository
+
+
